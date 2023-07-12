@@ -4,7 +4,7 @@ import * as fs from "fs-extra";
 import * as os from "node:os";
 import * as path from "node:path";
 
-import { MetaData, MetaDatas, RawData } from "../type";
+import { MetaData, MetaDataCollection, RawData } from "../type";
 
 export function parseTestCaseFile(filePath: string) {
 
@@ -15,7 +15,7 @@ export function parseTestCaseFile(filePath: string) {
   return jsonData as RawData[];
 }
 
-export function convertToMetaData(rawData: RawData[]): MetaDatas {
+export function convertToMetaData(rawData: RawData[]): MetaDataCollection {
   //
   const processSingleRow = (row: RawData): MetaData => {
     const {
@@ -37,14 +37,14 @@ export function convertToMetaData(rawData: RawData[]): MetaDatas {
     };
   };
 
-  return rawData.reduce<MetaDatas>((acc, cur) => {
+  return rawData.reduce<MetaDataCollection>((acc, cur) => {
     const { ID: id } = cur;
     acc[id] = processSingleRow(cur);
     return acc;
   }, {});
 }
 
-export function setupTestcaseFile() {
+export function setupTestCaseFile() {
   return vscode.commands.registerCommand(
     "extension.setupTestcaseFile",
     async () => {
@@ -64,11 +64,11 @@ export function setupTestcaseFile() {
         const metaData = convertToMetaData(fileData);
 
         const homeDir = os.homedir();
-        const outputPath = path.join(homeDir, "testcase.meta.json");
+        const outputPath = path.join(homeDir, "testCase.meta.json");
         await fs.ensureFile(outputPath);
         await fs.writeJson(outputPath, metaData);
 
-        vscode.window.showInformationMessage(`Testcase file setup complete!
+        vscode.window.showInformationMessage(`TestCase file setup complete!
         the meta data file at ${outputPath}
         `);
       }

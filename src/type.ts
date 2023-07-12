@@ -15,4 +15,4 @@ export type MetaData = {
    results: string[]
 }
 
-export type MetaDatas = Record<CaseId, MetaData >
+export type MetaDataCollection = Record<CaseId, MetaData>
