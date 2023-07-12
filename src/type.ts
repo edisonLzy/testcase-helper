@@ -1,6 +1,13 @@
-export type RawData = Record<string, string>
+import { ArrowFunctionExpression, FunctionExpression } from "@babel/types";
 
-export type CaseId = string
+export type RawData = Record<string, string>;
+
+export type CaseId = string;
+
+export type Step =  {
+   label: string
+   result: string
+};
 
 export type MetaData = {
    // case id
@@ -10,9 +17,9 @@ export type MetaData = {
    // case prerequisite
    prerequisite: string
    // steps
-   steps: string[]
-   // expected results
-   results: string[]
-}
+   steps: Step[]
+};
 
-export type MetaDataCollection = Record<CaseId, MetaData>
+export type MetaDataCollection = Record<CaseId, MetaData>;
+
+export type FunctionalExpression = ArrowFunctionExpression | FunctionExpression;
