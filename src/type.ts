@@ -5,8 +5,10 @@ export type RawData = Record<string, string>;
 export type CaseId = string;
 
 export type Step =  {
-   label: string
-   result: string
+   order: number
+   title: `Step${number}:`
+   description: string
+   expectation: string
 };
 
 export type MetaData = {
