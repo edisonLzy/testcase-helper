@@ -19,8 +19,8 @@ function getComments(prerequisite: string, steps: Step[]) {
   const comments: string[] = [];
 
   // prerequisite
-  const splitedPrerequisite = splitPrerequisite(prerequisite);
-  splitedPrerequisite.forEach((c) => {
+  const splittedPrerequisite = splitPrerequisite(prerequisite);
+  splittedPrerequisite.forEach((c) => {
     comments.push(c);
   });
   // steps
@@ -28,8 +28,8 @@ function getComments(prerequisite: string, steps: Step[]) {
     const { title, description } = step;
     comments.push(title);
 
-    const splitedDescription = splitStepDescription(description);
-    splitedDescription.forEach((desc) => {
+    const splittedDescription = splitStepDescription(description);
+    splittedDescription.forEach((desc) => {
       comments.push(desc);
     });
   });

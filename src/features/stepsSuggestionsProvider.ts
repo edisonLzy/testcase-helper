@@ -12,9 +12,9 @@ import { TestCaseManager,matchStepTitle } from "../helper/testCaseManager";
 
 function getClosetStepTitleCommentFromPosition(
   document: vscode.TextDocument,
-  positon: vscode.Position
+  position: vscode.Position
 ) {
-  let currentLine = positon.line;
+  let currentLine = position.line;
   while (currentLine >= 0) {
     const lineText = document.lineAt(currentLine).text.trim();
     if (lineText.startsWith("//") === false) {
@@ -64,9 +64,9 @@ export function stepsSuggestionsProvider(context: vscode.ExtensionContext) {
         if (!testCaseId) {
           return;
         }
-        const stepTitle = getClosetStepTitleCommentFromPosition(document,position)
+        const stepTitle = getClosetStepTitleCommentFromPosition(document,position);
         if(stepTitle === -1){
-          return 
+          return; 
         }
 
         const testCaseStep = testCaseManager.getCaseStep(testCaseId, stepTitle);
